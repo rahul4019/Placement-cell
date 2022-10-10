@@ -1,11 +1,21 @@
 <div class="container mt-4 col-md-4">
-  <h1>Sign In</h1>
+  <h1>Sign Up</h1>
   <form
+    action="/users/create"
     method="POST"
-    action="users/dashboard"
     class="mt-2 border border-dark rounded p-3"
     style="--bs-border-opacity: 0.5"
   >
+    <div class="mb-3">
+      <label for="username" class="form-label">username</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        name="username"
+        required
+      />
+    </div>
     <div class="mb-3">
       <label for="email" class="form-label">Email address</label>
       <input
@@ -14,6 +24,7 @@
         id="email"
         aria-describedby="emailHelp"
         name="email"
+        required
       />
       <div id="emailHelp" class="form-text">
         We'll never share your email with anyone else.
@@ -26,11 +37,22 @@
         class="form-control"
         id="password"
         name="password"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="confirm_password" class="form-label">Confirm Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="confirm_password"
+        name="confirm_password"
+        required
       />
     </div>
 
-    <button type="submit" class="btn btn-primary">Log In</button>
+    <button type="submit" class="btn btn-primary">Sign Up</button>
   </form>
 
-  <p class="mt-4"><a href="/sign-up">Create an account</a></p>
+  <p class="mt-4"><a href="/">Already have an account?</a></p>
 </div>
