@@ -53,3 +53,9 @@ module.exports.create = async (req, res) => {
     console.log(err);
   }
 };
+
+// sign in and create a session for the user
+module.exports.createSession = (req, res) => {
+    console.log('logged in successfully')
+    return res.redirect('/')
+}
