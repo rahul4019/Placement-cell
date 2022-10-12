@@ -4,11 +4,7 @@ const router = express.Router();
 
 const usersController = require("../controllers/users_controller");
 
-router.get(
-  "/profile",
-  passport.checkAuthentication,
-  usersController.profile
-);
+router.get("/profile", passport.checkAuthentication, usersController.profile);
 
 router.get("/", usersController.signIn);
 router.get("/sign-up", usersController.signUp);
@@ -21,5 +17,7 @@ router.post(
   passport.authenticate("local", { failureRedirect: "/" }),
   usersController.createSession
 );
+
+router.get("/sign-out", usersController.destroySession);
 
 module.exports = router;

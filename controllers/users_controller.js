@@ -3,10 +3,10 @@ const User = require("../models/user");
 module.exports.profile = function (req, res) {
   // console.log("user: ", req.params);
   // User.findById(req.params.id, function (err, user) {
-    return res.render("user_profile", {
-      title: "User Profile",
-      profile_user: req.user,
-    });
+  return res.render("user_profile", {
+    title: "User Profile",
+    profile_user: req.user,
+  });
   // });
 };
 
@@ -69,5 +69,14 @@ module.exports.createSession = (req, res) => {
   console.log("logged in successfully");
   return res.render("dashboard", {
     title: "Placement cell | Dashboard",
+  });
+};
+
+module.exports.destroySession = (req, res) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    return res.redirect("/");
   });
 };
