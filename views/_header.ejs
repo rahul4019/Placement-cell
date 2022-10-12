@@ -19,6 +19,8 @@
         class="collapse navbar-collapse justify-content-center"
         id="navbarSupportedContent"
       >
+        <% if (locals.user) {%>
+
         <ul class="nav">
           <li class="nav-item mx-5">
             <a class="nav-link active" aria-current="page" href="#"
@@ -31,14 +33,16 @@
           <li class="nav-item mx-5">
             <a class="nav-link" href="#">Download data</a>
           </li>
+          <li class="nav-item mx-5">
+          </li>
         </ul>
-
-        <button type="button" class="btn btn-outline-primary ms-5">
-          Update
-        </button>
+        
+        <a class="nav-link" href="/profile"><%= locals.user.username %></a>
         <button type="button" class="btn btn-outline-success ms-2">
           Sign Out
         </button>
+
+        <%} %>
       </div>
     </div>
   </nav>

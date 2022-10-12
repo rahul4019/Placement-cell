@@ -1,9 +1,19 @@
 const User = require("../models/user");
 
+module.exports.profile = function (req, res) {
+  // console.log("user: ", req.params);
+  // User.findById(req.params.id, function (err, user) {
+    return res.render("user_profile", {
+      title: "User Profile",
+      profile_user: req.user,
+    });
+  // });
+};
+
 // render the Sign In page
 module.exports.signIn = (req, res) => {
   return res.render("user_sign_in", {
-    title: "Placement cell | Sign Up",
+    title: "Placement cell | Sign In",
   });
 };
 
@@ -56,6 +66,8 @@ module.exports.create = async (req, res) => {
 
 // sign in and create a session for the user
 module.exports.createSession = (req, res) => {
-    console.log('logged in successfully')
-    return res.redirect('/')
-}
+  console.log("logged in successfully");
+  return res.render("dashboard", {
+    title: "Placement cell | Dashboard",
+  });
+};
