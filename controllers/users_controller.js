@@ -12,6 +12,9 @@ module.exports.profile = function (req, res) {
 
 // render the Sign In page
 module.exports.signIn = (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.redirect("/profile");
+  }
   return res.render("user_sign_in", {
     title: "Placement cell | Sign In",
   });
@@ -19,6 +22,9 @@ module.exports.signIn = (req, res) => {
 
 // render the Sign Up page
 module.exports.signUp = (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.redirect("/profile");
+  }
   return res.render("user_sign_up", {
     title: "Placement cell | Sign Up",
   });

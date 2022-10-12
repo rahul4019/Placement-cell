@@ -1,1 +1,4 @@
-<h1>welcome to dashboard page...</h1>
+<% if(locals.user) {%>
+<h1>This is profile page of <%= user.username %></h1>
+<%} %>
+
