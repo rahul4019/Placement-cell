@@ -73,9 +73,7 @@ module.exports.create = async (req, res) => {
 // sign in and create a session for the user
 module.exports.createSession = (req, res) => {
   console.log("logged in successfully");
-  return res.render("dashboard", {
-    title: "Placement cell | Dashboard",
-  });
+  return res.redirect("/dashboard");
 };
 
 module.exports.destroySession = (req, res) => {
