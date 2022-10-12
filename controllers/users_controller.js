@@ -1,8 +1,6 @@
 const User = require("../models/user");
 
 module.exports.profile = function (req, res) {
-  // console.log("user: ", req.params);
-  // User.findById(req.params.id, function (err, user) {
   return res.render("user_profile", {
     title: "User Profile",
     profile_user: req.user,
@@ -37,6 +35,7 @@ module.exports.create = async (req, res) => {
 
     // if password doesn't match
     if (password != confirm_password) {
+      req.flash("error", "Password and Confirm password are not same");
       return res.redirect("back");
     }
 
@@ -56,12 +55,14 @@ module.exports.create = async (req, res) => {
           },
           (err, user) => {
             if (err) {
-              console.log(err, "Error in creating user in signing up");
+              req.flash("error", "Couldn't sign Up");
             }
+            req.flash("success", "Account created!");
             return res.redirect("/");
           }
         );
       } else {
+        req.flash("error", "Email already registed!");
         return res.redirect("back");
       }
     });
@@ -72,7 +73,7 @@ module.exports.create = async (req, res) => {
 
 // sign in and create a session for the user
 module.exports.createSession = (req, res) => {
-  console.log("logged in successfully");
+  req.flash("success", "Logged in successfully");
   return res.redirect("/dashboard");
 };
 
@@ -81,6 +82,7 @@ module.exports.destroySession = (req, res) => {
     if (err) {
       return next(err);
     }
+    req.flash("success", "Logged out successfully!");
     return res.redirect("/");
   });
 };

@@ -9,7 +9,10 @@ const expressLayouts = require("express-ejs-layouts");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocal = require("./config/passport-local-strategy");
+
 const MongoStore = require("connect-mongo");
+const flash = require("connect-flash");
+const customMware = require("./config/middleware");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -30,7 +33,7 @@ app.use(
     saveUninitialized: false,
     resave: false,
     cookie: {
-      maxAge: 1000 * 60 * 10000000,
+      maxAge: 1000 * 60 * 1000,
     },
     store: MongoStore.create({
       mongoUrl: "mongodb://127.0.0.1:27017/placement_cell",
@@ -47,6 +50,9 @@ app.use(passport.session());
 
 // sets the authenticated user in the response
 app.use(passport.setAuthenticatedUser);
+
+app.use(flash());
+app.use(customMware.setFlash);
 
 // use express router
 app.use("/", require("./routes"));
