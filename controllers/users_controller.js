@@ -5,7 +5,35 @@ module.exports.profile = function (req, res) {
     title: "User Profile",
     profile_user: req.user,
   });
-  // });
+};
+
+module.exports.update = async function (req, res) {
+  try {
+    const user = await User.findById(req.user.id);
+    const { username, password, confirm_password } = req.body;
+    console.log(username, password);
+
+    if (password != confirm_password) {
+      req.flash("error", "New password and Confirm password are not same!");
+      return res.redirect("back");
+    }
+
+    if (!user) {
+      req.flash("error", "User does not exist!");
+      return res.redirect("back");
+    }
+
+    user.username = username;
+    user.password = password;
+
+    user.save();
+    req.flash("success", "profile updated");
+    return res.redirect("back");
+  } catch (err) {
+    req.flash("error", err);
+    console.log(err);
+    return res.redirect("back");
+  }
 };
 
 // render the Sign In page
@@ -77,6 +105,7 @@ module.exports.createSession = (req, res) => {
   return res.redirect("/dashboard");
 };
 
+// clears the cookie 
 module.exports.destroySession = (req, res) => {
   req.logout((err) => {
     if (err) {

@@ -1,7 +1,49 @@
 <% if(user.id == profile_user.id) {%>
 
-  <h1>profile page</h1>
+<div class="container mt-4 col-md-4">
+  <h3 class="py-2">Update profile</h3>
+  <form
+    action="/update"
+    method="POST"
+    class="mt-2 border border-dark rounded p-3"
+    style="--bs-border-opacity: 0.5"
+  >
+    <div class="mb-3">
+      <label for="username" class="form-label">username</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        name="username"
+        value="<%= profile_user.username %>"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">New password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        placeholder="Enter new password"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="confirm_password" class="form-label">Confirm Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="confirm_password"
+        name="confirm_password"
+        placeholder="Enter confirm password"
+        required
+      />
+    </div>
 
-  <%= user.email %>
+    <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+</div>
+
 <%} %>
-

@@ -33,15 +33,19 @@
           <li class="nav-item mx-5">
             <a class="nav-link" href="#">Download data</a>
           </li>
+          <li class="nav-item mx-5">
+            <a class="nav-link" href="/profile"><%= user.username %></a>
+          </li>
+          <li class="nav-item mx-5">
+            <a class="nav-link" href="/sign-out">Sign Out</a>
+          </li>
           <li class="nav-item mx-5"></li>
         </ul>
 
-        <button type="button" class="btn btn-outline-primary ms-2">
-          <a class="nav-link" href="/profile"><%= user.username %></a>
+        <!-- <button type="button" class="btn btn-outline-primary ms-2">
         </button>
         <button type="button" class="btn btn-outline-success ms-2">
-          <a class="nav-link" href="/sign-out">Sign Out</a>
-        </button>
+        </button> -->
 
         <%} else{ %> <%} %>
       </div>
