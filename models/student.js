@@ -15,7 +15,7 @@ const studentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    batchNO: {
+    batch: {
       type: String,
       required: true,
     },
@@ -23,12 +23,17 @@ const studentSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    webdevelopment_score: {
+    webdev_score: {
       type: Number,
       required: true,
     },
     react_score: {
       type: Number,
+      required: true,
+    },
+    placement_status: {
+      type: String,
+      enum: ["Placed", "Not placed"],
       required: true,
     },
     interviews: [
