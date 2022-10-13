@@ -2,9 +2,13 @@ const Student = require("../models/student");
 
 // render add student page
 module.exports.addStudent = (req, res) => {
-  return res.render("add_student", {
-    title: "Add Student",
-  });
+  if (req.isAuthenticated()) {
+    return res.render("add_student", {
+      title: "Add Student",
+    });
+  }
+
+  return res.redirect("/");
 };
 
 module.exports.create = async (req, res) => {
@@ -42,6 +46,7 @@ module.exports.create = async (req, res) => {
           (err, student) => {
             if (err) {
               req.flash("error", "Couldn't add student!");
+              return res.redirect("back");
             }
             req.flash("success", "Student added!");
             return res.redirect("back");

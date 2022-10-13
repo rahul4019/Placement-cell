@@ -1,0 +1,42 @@
+<% if (locals.user) {%>
+    <div class="container mt-4 col-md-4">
+    <h4>Add an interview </h4>
+  
+    <form class="row g-3 mt-1 border border-dark rounded p-2" 
+     style="--bs-border-opacity: 0.5" action="/interview/create" method="POST">
+  
+      <div class="col-12">
+        <label for="company" class="form-label">Company</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter company name"
+          id="company"
+          name="company"
+          required
+        />
+      </div>
+  
+      <div class="col-12">
+        <label for="date" class="form-label">Date</label>
+        <input
+          type="date"
+          class="form-control"
+          placeholder="Enter student email"
+          id="date"
+          name="date"
+          required
+        />
+      </div>
+  
+          
+      <div class="col-12 ">
+        <button type="submit" class="btn btn-primary">Add interview</button>
+      </div>
+  
+    </form>
+  </div>
+  </div>
+  
+  <%} %>
+  
