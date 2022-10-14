@@ -11,6 +11,21 @@ module.exports.addStudent = (req, res) => {
   return res.redirect("/");
 };
 
+// render edit student page
+module.exports.editStudent = async (req, res) => {
+  const student = await Student.findById(req.params.id);
+
+  if (req.isAuthenticated()) {
+    return res.render("edit_student", {
+      title: "Edit Student",
+      student_details: student,
+    });
+  }
+
+  return res.redirect("/");
+};
+
+// creation of new student
 module.exports.create = async (req, res) => {
   try {
     const {
@@ -59,5 +74,61 @@ module.exports.create = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
+  }
+};
+
+// Deletion of student
+module.exports.destroy = async (req, res) => {
+  try {
+    let student = await Student.findById(req.params.id);
+
+    if (!student) {
+      req.flash("error", "Couldn't find student");
+      return;
+    }
+
+    student.remove();
+    req.flash("success", "Student deleted!");
+    return res.redirect("back");
+  } catch (err) {
+    console.log("error", err);
+    return;
+  }
+};
+
+// update student details
+module.exports.update = async (req, res) => {
+  try {
+    const student = await Student.findById(req.params.id);
+    const {
+      name,
+      college,
+      batch,
+      dsa_score,
+      react_score,
+      webdev_score,
+      placement_status,
+    } = req.body;
+
+    if (!student) {
+      req.flash("error", "Student does not exist!");
+      return res.redirect("back");
+    }
+
+    student.name = name;
+    student.college = college;
+    student.batch = batch;
+    student.dsa_score = dsa_score;
+    student.react_score = react_score;
+    student.webdev_score = webdev_score;
+    student.placement_status = placement_status;
+
+    student.save();
+    req.flash("success", "Student updated!");
+    return res.redirect("/dashboard");
+  } catch (err) {
+    req.flash("error", err);
+    console.log(err);
+    return res.redirect("back");
   }
 };

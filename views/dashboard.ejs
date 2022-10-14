@@ -1,4 +1,209 @@
 <% if(locals.user) {%>
-    <h1>Welcome <%= user.username %> ...</h1>
-<%} %>
+<div class="d-flex m-0 mt-5 flex-wrap justify-content-center">
+  <div
+    class="d-flex flex-column align-items-center p-2"
+    style="min-height: 500px; min-width: 700px"
+  >
+    <h3>Students list</h3>
+    <div class="accordion accordion-flush" style="width: 80%">
+      <% for (student of all_students) {%>
+      <div class="accordion-item my-2 border border-1 rounded">
+        <h2 class="accordion-header" id="headingOne">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapse<%= student._id %>"
+            aria-expanded="false"
+            aria-controls="collapse<%= student._id %>"
+          >
+            <%= student.name %>
+          </button>
+        </h2>
+        <div
+          id="collapse<%= student._id %>"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body d-flex flex-column">
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <td>Name</td>
+                  <td><%= student.name %></td>
+                </tr>
+                <tr>
+                  <td>Email</td>
+                  <td><%= student.email %></td>
+                </tr>
+                <tr>
+                  <td>College</td>
+                  <td><%= student.college %></td>
+                </tr>
+                <tr>
+                  <td>Batch</td>
+                  <td><%= student.batch %></td>
+                </tr>
+                <tr>
+                  <td>Status</td>
+                  <td><%= student.placement_status %></td>
+                </tr>
+                <tr>
+                  <td>DSA score</td>
+                  <td><%= student.dsa_score %></td>
+                </tr>
+                <tr>
+                  <td>Web development score</td>
+                  <td><%= student.webdev_score %></td>
+                </tr>
+                <tr>
+                  <td>React score</td>
+                  <td><%= student.react_score %></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="d-flex justify-content-around" style="width: 100%">
+              <a
+                href="/student/edit-student/<%= student.id %>"
+                class="btn btn-primary"
+                style="width: 40%"
+              >
+                Edit
+              </a>
+              <a
+                href="/student/destroy/<%= student.id %>"
+                class="btn btn-danger"
+                style="width: 40%"
+              >
+                Delete
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%} %>
+    </div>
+  </div>
+  <div
+    class="d-flex flex-column align-items-center p-2"
+    style="min-height: 400px; min-width: 600px"
+  >
+    <h3>Scheduled Interviews</h3>
+    <div class="accordion accordion-flush" style="width: 80%">
+      <% for (interview of all_interviews) {%>
+      <div class="accordion-item my-2 border border-1 rounded">
+        <h2 class="accordion-header" id="headingOne">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapse<%= interview._id %>"
+            aria-expanded="false"
+            aria-controls="collapse<%= interview._id %>"
+          >
+            <%= interview.company %>
+          </button>
+        </h2>
+        <div
+          id="collapse<%= interview._id %>"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body d-flex flex-column align-items-center">
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <td>Company</td>
+                  <td><%= interview.company %></td>
+                </tr>
+                <tr>
+                  <td>Date</td>
+                  <td><%= interview.date %></td>
+                </tr>
+              </tbody>
+            </table>
 
+            <div
+              class="d-flex flex-column align-items-center"
+              style="width: 100%"
+            >
+              <h5>Enrolled students</h5>
+
+              <% for (student of interview.students) {%>
+
+              <div
+                class="border border-secondry rounded mb-2"
+                style="width: 100%"
+              >
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td>Name</td>
+                      <td><%= student.id %></td>
+                    </tr>
+                    <tr>
+                      <td>Result</td>
+                      <td><%= student.result %></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <a href="" class="btn btn-danger ms-2 mb-2" style="width: 40%"
+                  >Delete</a
+                >
+              </div>
+
+              <%} %>
+            </div>
+
+            <div
+              class="d-flex flex-column align-items-center border-top border-secondry"
+              style="width: 100%"
+            >
+              <h5 class="mt-2">Add student</h5>
+              <form
+                class="container-fluid"
+                action="/interview/enroll-in-interview/<%= interview.id %>"
+                method="POST"
+              >
+                <div class="mb-3">
+                  <label for="student_email" class="form-label"
+                    >Student email</label
+                  >
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="student_email"
+                    aria-describedby="emailHelp"
+                    name="email"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="result" class="form-label">Result</label>
+                  <select
+                    id="result"
+                    class="form-select"
+                    name="result"
+                    required
+                  >
+                    <option selected>PASS</option>
+                    <option>FAIL</option>
+                    <option>On Hold</option>
+                    <option>Didn't attempt</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  &nbsp; Add &nbsp;
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%} %>
+    </div>
+  </div>
+</div>
+<%} %>

@@ -1,6 +1,6 @@
 <header>
-  <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd">
-    <div class="container-fluid">
+  <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
+    <div class="container-fluid" ">
       <a class="navbar-brand h1" href="/dashboard">
         <i class="fa-solid fa-code"></i> Placement Cell</a
       >
@@ -22,29 +22,29 @@
         <% if (locals.user) {%>
 
         <ul class="nav">
-          <li class="nav-item mx-5">
+          <li class="nav-item mx-3">
             <a
-              class="nav-link active"
+              class="nav-link "
               aria-current="page"
               href="/student/add-student"
               >Add new Student</a
             >
           </li>
-          <li class="nav-item mx-5">
+          <li class="nav-item mx-3">
             <a class="nav-link" href="/interview/add-interview"
-              >Schedule an Interview</a
+              >Add an Interview</a
             >
           </li>
-          <li class="nav-item mx-5">
+          <li class="nav-item mx-3">
             <a class="nav-link" href="#">Download data</a>
           </li>
-          <li class="nav-item mx-5">
+          <li class="nav-item mx-3">
             <a class="nav-link" href="/profile"><%= user.username %></a>
           </li>
-          <li class="nav-item mx-5">
+          <li class="nav-item mx-3">
             <a class="nav-link" href="/sign-out">Sign Out</a>
           </li>
-          <li class="nav-item mx-5"></li>
+          <li class="nav-item mx-3"></li>
         </ul>
 
         <!-- <button type="button" class="btn btn-outline-primary ms-2">

@@ -27,7 +27,7 @@ module.exports.update = async function (req, res) {
     user.password = password;
 
     user.save();
-    req.flash("success", "profile updated");
+    req.flash("success", "profile updated!");
     return res.redirect("back");
   } catch (err) {
     req.flash("error", err);

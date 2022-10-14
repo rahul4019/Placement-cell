@@ -7,4 +7,6 @@ router.get("/add-interview", interviewController.addInterview);
 
 router.post("/create", interviewController.create);
 
+router.post("/enroll-in-interview/:id", interviewController.enrollInInterview);
+
 module.exports = router;
