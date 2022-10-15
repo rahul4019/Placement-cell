@@ -1,11 +1,13 @@
 const Student = require("../models/student");
-const Interview = require("../models/interview")
+const Interview = require("../models/interview");
 
 module.exports.dashboard = async (req, res) => {
   try {
     if (req.isAuthenticated()) {
       let students = await Student.find({});
-      let interviews = await Interview.find({});
+
+      // populating the student of each interview
+      let interviews = await Interview.find({}).populate("students.student");
 
       return res.render("dashboard", {
         title: "Dashboard",
@@ -17,6 +19,6 @@ module.exports.dashboard = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
-    return;
+    return res.redirect("back");
   }
 };

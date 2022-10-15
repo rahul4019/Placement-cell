@@ -1,6 +1,7 @@
 const Interview = require("../models/interview");
 const Student = require("../models/student");
 
+// renders the addInterview page
 module.exports.addInterview = (req, res) => {
   if (req.isAuthenticated()) {
     return res.render("add_interview", {
@@ -11,6 +12,7 @@ module.exports.addInterview = (req, res) => {
   return res.redirect("/");
 };
 
+// Creation of new interview
 module.exports.create = async (req, res) => {
   try {
     const { company, date } = req.body;
@@ -48,6 +50,7 @@ module.exports.enrollInInterview = async (req, res) => {
           "students.student": student.id,
         });
 
+        // preventing student from enrolling in same company more than once
         if (alreadyEnrolled) {
           if (alreadyEnrolled.company === interview.company) {
             req.flash(
@@ -62,9 +65,17 @@ module.exports.enrollInInterview = async (req, res) => {
           student: student.id,
           result: result,
         };
+
+        // updating students field of interview by putting reference of newly enrolled student
         await interview.updateOne({
           $push: { students: studentObj },
         });
+
+        // updating interview field of student by putting reference of company in which student was enrolled
+        await student.updateOne({
+          $push: { interviews: interview.id },
+        });
+
         req.flash(
           "success",
           `${student.name} enrolled in ${interview.company} interview!`
