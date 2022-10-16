@@ -2,7 +2,7 @@
 <div class="d-flex m-0 mt-5 flex-wrap justify-content-center">
   <div
     class="d-flex flex-column align-items-center p-2"
-    style="min-height: 500px; min-width: 700px"
+    style="min-height: 500px; min-width: 600px"
   >
     <h3>Students list</h3>
     <div class="accordion accordion-flush" style="width: 80%">
@@ -79,6 +79,35 @@
                 Delete
               </a>
             </div>
+
+            <div
+              class="mt-3 d-flex border-top flex-column align-items-center"
+              style="width: 100%"
+            >
+              <h3 class="mt-2">Interviews</h3>
+
+              <% for(interview of student.interviews) {%>
+              <table
+                class="border rounded border-secondry p-5"
+                style="width: 100%"
+              >
+                <thead>
+                  <tr>
+                    <th scope="col">Company</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Result</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><%= interview.company %></td>
+                    <td><%= interview.date %></td>
+                    <td><%= interview.result %></td>
+                  </tr>
+                </tbody>
+              </table>
+              <%} %>
+            </div>
           </div>
         </div>
       </div>
@@ -131,7 +160,7 @@
             >
               <h5>Enrolled students</h5>
 
-              <% for (student of interview.students) {%>
+              <% for (i of interview.students) {%>
 
               <div
                 class="border border-secondry rounded mb-2"
@@ -141,15 +170,15 @@
                   <tbody>
                     <tr>
                       <td>Name</td>
-                      <td><%= student.student.name %></td>
+                      <td><%= i.student.name %></td>
                     </tr>
                     <tr>
                       <td>Email</td>
-                      <td><%= student.student.email %></td>
+                      <td><%= i.student.email %></td>
                     </tr>
                     <tr>
                       <td>Result</td>
-                      <td><%= student.result %></td>
+                      <td><%= i.result %></td>
                     </tr>
                   </tbody>
                 </table>

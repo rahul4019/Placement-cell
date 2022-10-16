@@ -71,9 +71,14 @@ module.exports.enrollInInterview = async (req, res) => {
           $push: { students: studentObj },
         });
 
-        // updating interview field of student by putting reference of company in which student was enrolled
+        // updating interview of student
+        let assignedInterview = {
+          company: interview.company,
+          date: interview.date,
+          result: result,
+        };
         await student.updateOne({
-          $push: { interviews: interview.id },
+          $push: { interviews: assignedInterview },
         });
 
         req.flash(

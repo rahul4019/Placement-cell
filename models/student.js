@@ -38,8 +38,18 @@ const studentSchema = new mongoose.Schema(
     },
     interviews: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Interview",
+        company: {
+          type: String,
+          required: true,
+        },
+        date: {
+          type: String,
+          required: true,
+        },
+        result: {
+          type: String,
+          enum: ["PASS", "FAIL", "Didn't Attempt", "On Hold"],
+        },
       },
     ],
   },
