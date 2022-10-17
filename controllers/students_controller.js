@@ -1,4 +1,5 @@
 const Student = require("../models/student");
+const Interview = require("../models/interview");
 
 // render add student page
 module.exports.addStudent = (req, res) => {
@@ -80,11 +81,24 @@ module.exports.create = async (req, res) => {
 // Deletion of student
 module.exports.destroy = async (req, res) => {
   try {
-    let student = await Student.findById(req.params.id);
+    const { studentId } = req.params;
+    const student = await Student.findById(studentId);
 
     if (!student) {
       req.flash("error", "Couldn't find student");
       return;
+    }
+
+    const interviewsOfStudent = student.interviews;
+
+    // delete reference of student from companies in which this student is enrolled
+    if (interviewsOfStudent.length > 0) {
+      for (let interview of interviewsOfStudent) {
+        await Interview.findOneAndUpdate(
+          { company: interview.company },
+          { $pull: { students: { student: studentId } } }
+        );
+      }
     }
 
     student.remove();

@@ -96,3 +96,38 @@ module.exports.enrollInInterview = async (req, res) => {
     req.flash("error", "Error in enrolling interview!");
   }
 };
+
+// deallocating students from an interview
+module.exports.deallocate = async (req, res) => {
+  try {
+    const { studentId, interviewId } = req.params;
+
+    // find the interview
+    const interview = await Interview.findById(interviewId);
+
+    if (interview) {
+      // remove reference of student from interview schema
+      await Interview.findOneAndUpdate(
+        { _id: interviewId },
+        { $pull: { students: { student: studentId } } }
+      );
+
+      // remove interview from student's schema using interview's company
+      await Student.findOneAndUpdate(
+        { _id: studentId },
+        { $pull: { interviews: { company: interview.company } } }
+      );
+
+      req.flash(
+        "success",
+        `Successfully deallocated from ${interview.company} interview!`
+      );
+      return res.redirect("back");
+    }
+
+    req.flash("error", "Interview not found");
+    return res.redirect("back");
+  } catch (err) {
+    req.flash("error", "Couldn't deallocate from interview");
+  }
+};
