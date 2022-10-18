@@ -1,11 +1,11 @@
 <% if(locals.user) {%>
-<div class="d-flex m-0 mt-5 flex-wrap justify-content-center">
+<div class="d-flex m-0 mt-5 p-2 flex-wrap justify-content-center">
   <div
-    class="d-flex flex-column align-items-center p-2"
-    style="min-height: 500px; min-width: 600px"
+    class="d-flex flex-column align-items-center p-2 mx-auto my-2 container-sm shadow rounded"
+    style="max-width: 600px; max-height: 600px; overflow-y: auto"
   >
-    <h3>Students list</h3>
-    <div class="accordion accordion-flush" style="width: 80%">
+    <h3 class="mt-2">Students list</h3>
+    <div class="accordion accordion-flush" style="width: 90%">
       <% for (student of all_students) {%>
       <div class="accordion-item my-2 border border-1 rounded">
         <h2 class="accordion-header" id="headingOne">
@@ -17,7 +17,7 @@
             aria-expanded="false"
             aria-controls="collapse<%= student._id %>"
           >
-            <%= student.name %>
+            <span class="fw-semibold text-capitalize"><%= student.name %></span>
           </button>
         </h2>
         <div
@@ -27,7 +27,7 @@
           data-bs-parent="#accordionExample"
         >
           <div class="accordion-body d-flex flex-column">
-            <table class="table table-striped">
+            <table class="table table-striped border">
               <tbody>
                 <tr>
                   <td>Name</td>
@@ -86,11 +86,7 @@
             >
               <h3 class="mt-2">Interviews</h3>
 
-              <% for(interview of student.interviews) {%>
-              <table
-                class="border rounded border-secondry p-5"
-                style="width: 100%"
-              >
+              <table style="width: 100%">
                 <thead>
                   <tr>
                     <th scope="col">Company</th>
@@ -99,14 +95,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <% for(interview of student.interviews) {%>
+                  <tr class="text-capitalize">
                     <td><%= interview.company %></td>
                     <td><%= interview.date %></td>
                     <td><%= interview.result %></td>
                   </tr>
+                  <%} %>
                 </tbody>
               </table>
-              <%} %>
             </div>
           </div>
         </div>
@@ -115,11 +112,11 @@
     </div>
   </div>
   <div
-    class="d-flex flex-column align-items-center p-2"
-    style="min-height: 400px; min-width: 600px"
+    class="d-flex flex-column align-items-center p-2 mx-auto my-2 container-sm shadow rounded"
+    style="max-width: 600px; max-height: 600px; overflow-y: auto"
   >
-    <h3>Scheduled Interviews</h3>
-    <div class="accordion accordion-flush" style="width: 80%">
+    <h3 class="mt-2">Scheduled Interviews</h3>
+    <div class="accordion accordion-flush" style="width: 90%">
       <% for (interview of all_interviews) {%>
       <div class="accordion-item my-2 border border-1 rounded">
         <h2 class="accordion-header" id="headingOne">
@@ -131,7 +128,9 @@
             aria-expanded="false"
             aria-controls="collapse<%= interview._id %>"
           >
-            <%= interview.company %>
+            <span class="fw-semibold font-seigeUi text-uppercase"
+              ><%= interview.company %></span
+            >
           </button>
         </h2>
         <div
@@ -141,14 +140,14 @@
           data-bs-parent="#accordionExample"
         >
           <div class="accordion-body d-flex flex-column align-items-center">
-            <table class="table table-striped">
+            <table class="table">
               <tbody>
                 <tr>
-                  <td>Company</td>
+                  <th scope="row">Company</th>
                   <td><%= interview.company %></td>
                 </tr>
                 <tr>
-                  <td>Date</td>
+                  <th scope="col">Date</th>
                   <td><%= interview.date %></td>
                 </tr>
               </tbody>
@@ -194,7 +193,7 @@
             </div>
 
             <div
-              class="d-flex flex-column align-items-center border rounded p-2 border-info"
+              class="d-flex flex-column align-items-center border rounded p-2 m-2 shadow-sm"
               style="width: 100%"
             >
               <h5 class="mt-2">Add student</h5>

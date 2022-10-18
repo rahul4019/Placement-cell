@@ -1,6 +1,6 @@
 <header>
-  <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
-    <div class="container-fluid" ">
+  <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd">
+    <div class="container-fluid">
       <a class="navbar-brand h1" href="/dashboard">
         <i class="fa-solid fa-code"></i> Placement Cell</a
       >
@@ -16,40 +16,39 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div
-        class="collapse navbar-collapse justify-content-center"
+        class="collapse navbar-collapse justify-content-around "
         id="navbarSupportedContent"
       >
         <% if (locals.user) {%>
 
         <ul class="nav">
-          <li class="nav-item mx-3">
-            <a
-              class="nav-link "
-              aria-current="page"
-              href="/student/add-student"
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="/dashboard">Dashboard</a>
+          </li> 
+          <li class="nav-item mx-2">
+            <a class="nav-link" aria-current="page" href="/student/add-student"
               >Add new Student</a
             >
           </li>
-          <li class="nav-item mx-3">
+          <li class="nav-item mx-2">
             <a class="nav-link" href="/interview/add-interview"
               >Add an Interview</a
             >
           </li>
-          <li class="nav-item mx-3">
+          <li class="nav-item mx-2">
             <a class="nav-link" href="/download">Download Report</a>
           </li>
-          <li class="nav-item mx-3">
-            <a class="nav-link" href="/profile"><%= user.username %></a>
-          </li>
-          <li class="nav-item mx-3">
-            <a class="nav-link" href="/sign-out">Sign Out</a>
-          </li>
-          <li class="nav-item mx-3"></li>
         </ul>
 
-        
+        <form >
+          <a class="btn btn-outline-secondary mx-2" href="/profile">
+            <i class="fa-regular fa-user"></i>
+            <%= user.username %></a
+          >
+          <a class="btn btn-outline-success mx-2" href="/sign-out">Sign Out</a>
+        </form>
 
-        <%}  %>
+        <%} %>
       </div>
     </div>
   </nav>

@@ -1,7 +1,4 @@
 student Id, Student name,Student college, Student email, Student status, DSA Final Score, WebD Final Score, React Final Score, Interview date, Interview company, Interview result
-634d4c8580824acca9770c1a,amit,asgasx,amit@gmail.com,Placed,97,65,1,2022-10-17,amazon,PASS
-634d4c8580824acca9770c1a,amit,asgasx,amit@gmail.com,Placed,97,65,1,2022-09-30,google,On Hold
 634d4c9e80824acca9770c1f,gaurav,ignou,gaurav@gmail.com,Not placed,34,65,97,2022-09-30,google,Didn't attempt
 634d4c9e80824acca9770c1f,gaurav,ignou,gaurav@gmail.com,Not placed,34,65,97,2022-10-17,amazon,PASS
-634d4cb680824acca9770c2b,rahul,IIT,rahul@gmail.com,Placed,67,95,93,2022-10-17,amazon,FAIL
 634d4cb680824acca9770c2b,rahul,IIT,rahul@gmail.com,Placed,67,95,93,2022-09-30,google,PASS
