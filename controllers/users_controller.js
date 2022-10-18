@@ -7,6 +7,7 @@ module.exports.profile = function (req, res) {
   });
 };
 
+// updates user details
 module.exports.update = async function (req, res) {
   try {
     const user = await User.findById(req.user.id);

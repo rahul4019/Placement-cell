@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
-
-const MONGODB_URL = "mongodb://127.0.0.1:27017/placement_cell";
+require("dotenv").config();
 
 exports.connect = () => {
   mongoose
-    .connect(MONGODB_URL, {
+    .connect(process.env.MONGODB_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })

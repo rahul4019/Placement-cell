@@ -1,10 +1,12 @@
 require("./config/database").connect();
 const express = require("express");
+const dotenv = require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const app = express();
-const port = 8000;
+const { PORT, MONGODB_URL, SESSION_SECRET_KEY } = process.env;
 const expressLayouts = require("express-ejs-layouts");
+
 // used for session cookie
 const session = require("express-session");
 const passport = require("passport");
@@ -28,15 +30,14 @@ app.set("views", "./views");
 app.use(
   session({
     name: "placement-cell",
-    // TODO change the secret before deployment in production mode
-    secret: "mySecret",
+    secret: SESSION_SECRET_KEY,
     saveUninitialized: false,
     resave: false,
     cookie: {
       maxAge: 1000 * 60 * 100,
     },
     store: MongoStore.create({
-      mongoUrl: "mongodb://127.0.0.1:27017/placement_cell",
+      mongoUrl: MONGODB_URL,
       autoRemove: "disabled",
     }),
     function(err) {
@@ -57,9 +58,9 @@ app.use(customMware.setFlash);
 // use express router
 app.use("/", require("./routes"));
 
-app.listen(port, (err) => {
+app.listen(PORT, (err) => {
   if (err) {
     console.log(`Error in running the server: ${err}`);
   }
-  console.log(`server is running on port: ${port}`);
+  console.log(`server is running on port: ${PORT}`);
 });
