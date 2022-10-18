@@ -12,7 +12,6 @@ module.exports.update = async function (req, res) {
   try {
     const user = await User.findById(req.user.id);
     const { username, password, confirm_password } = req.body;
-    console.log(username, password);
 
     if (password != confirm_password) {
       req.flash("error", "New password and Confirm password are not same!");
@@ -106,7 +105,7 @@ module.exports.createSession = (req, res) => {
   return res.redirect("/dashboard");
 };
 
-// clears the cookie 
+// clears the cookie
 module.exports.destroySession = (req, res) => {
   req.logout((err) => {
     if (err) {
