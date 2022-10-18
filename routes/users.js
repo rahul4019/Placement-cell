@@ -2,6 +2,7 @@ const express = require("express");
 const passport = require("passport");
 const router = express.Router();
 
+const { downloadCSVReport } = require("../controllers/csv_controller");
 const usersController = require("../controllers/users_controller");
 const dashboardController = require("../controllers/dashboard_controller");
 
@@ -22,5 +23,7 @@ router.post(
 );
 
 router.get("/sign-out", usersController.destroySession);
+
+router.get("/download", downloadCSVReport);
 
 module.exports = router;
