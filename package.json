@@ -4,7 +4,7 @@
   "description": "placement cell web app which manages placement interviews of students.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "author": "rahul4019",
   "license": "ISC",
